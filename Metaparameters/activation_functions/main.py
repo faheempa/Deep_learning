@@ -52,6 +52,13 @@ plt.plot(x, y)
 plt.title("ReLU6")
 plt.xlabel("x")
 plt.ylabel("y")
+# mark the point where the slope changes
+plt.scatter(6, 6, color="red")
+plt.scatter(-6, 0, color="red")
+plt.axvline(x=6, color="red", linestyle="--")
+plt.axhline(y=6, color="red", linestyle="--")
+plt.axvline(x=-6, color="red", linestyle="--")
+plt.axhline(y=0, color="red", linestyle="--")
 plt.show()
 
 # leakyrelu

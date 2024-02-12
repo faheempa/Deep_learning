@@ -52,10 +52,10 @@ test_data = TensorDataset(test_x, test_y)
 
 train_data_loader = DataLoader(train_data, batch_size=32, shuffle=True, drop_last=True)
 test_data_loader = DataLoader(test_data, batch_size=len(test_data), shuffle=True)
-print("Train data size: ", len(train_data))
-print("No of batches: ", len(train_data_loader))
-print("Batch size: ", train_data_loader.batch_size)
-print("Test data size: ", len(test_data))
+# print("Train data size: ", len(train_data))
+# print("No of batches: ", len(train_data_loader))
+# print("Batch size: ", train_data_loader.batch_size)
+# print("Test data size: ", len(test_data))
 
 
 # ANN model
@@ -121,7 +121,7 @@ def train(model, optimizer, loss, train_data_loader, test_data_loader, epochs=10
 
 # expiriment
 optims = ["SGD", "Adam", "RMSprop"]
-LRS = np.linspace(0.0001, 0.1, 20)
+LRS = np.linspace(0.0001, 0.1, 25)
 epochs = 100
 train_acc = np.zeros((len(optims), len(LRS), epochs))
 test_acc = np.zeros((len(optims), len(LRS), epochs))
@@ -139,5 +139,6 @@ for i, optim in enumerate(optims):
     plt.plot(LRS, np.mean(test_acc[i, :, :], axis=1), label=optim, linestyle="--", marker="o")
 plt.xlabel("Learning rate")
 plt.ylabel("Accuracy")
+plt.yscale("log")
 plt.legend()
 plt.show()

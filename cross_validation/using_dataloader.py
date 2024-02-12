@@ -19,14 +19,16 @@ labels[iris.species == "virginica"] = 2
 
 
 # making train and test sets using sklearn
-train_data, test_data, train_labels, test_labels = train_test_split(data, labels, test_size=0.2)
+train_data, test_data, train_labels, test_labels = train_test_split(
+    data, labels, test_size=0.2
+)
 # convert them into pytorch datasets
 train_dataset = TensorDataset(train_data, train_labels)
 test_dataset = TensorDataset(test_data, test_labels)
 # make dataloaders
 train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=True)
-# checking shapes 
+# checking shapes
 for data, labels in train_loader:
     print(f"train data: {data.shape} train labels: {labels.shape}")
 for data, labels in test_loader:
@@ -65,14 +67,15 @@ for epoch in range(epochs):
     # train accuracy
     pred = ANNiris(train_data)
     predLabel = torch.argmax(pred, axis=1)
-    train_acc.append(torch.mean((predLabel == train_labels).float())*100)
+    train_acc.append(torch.mean((predLabel == train_labels).float()) * 100)
 
     # test accuracy
     pred = ANNiris(test_data)
     predLabel = torch.argmax(pred, axis=1)
-    test_acc.append(torch.mean((predLabel == test_labels).float())*100)
+    test_acc.append(torch.mean((predLabel == test_labels).float()) * 100)
 
 # plot
+plt.figure(figsize=(10, 7))
 plt.plot(train_acc, label="train accuracy")
 plt.plot(test_acc, label="test accuracy")
 plt.legend()
@@ -82,5 +85,3 @@ plt.show()
 pred = ANNiris(test_data)
 predLabel = torch.argmax(pred, axis=1)
 print(f"final accuracy: {torch.mean((predLabel == test_labels).float())*100}")
-
-

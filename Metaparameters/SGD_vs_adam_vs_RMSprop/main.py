@@ -135,7 +135,7 @@ def train(model, optimizer, loss, train_data_loader, test_data_loader, epochs=10
 
 # expiriment
 optums = ["SGD", "Adam", "RMSprop"]
-epochs = 100
+epochs = 50
 train_acc = np.zeros((len(optums), epochs))
 test_acc = np.zeros((len(optums), epochs))
 

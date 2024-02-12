@@ -11,8 +11,8 @@ for p in x:
 print("Entropy: ", H)
 
 # explicitily wriiten as
-p=0.25
-H = -(p * np.log(p) + (1-p) * np.log(1-p))
+p = 0.25
+H = -(p * np.log(p) + (1 - p) * np.log(1 - p))
 print("Entropy: ", H)
 
 

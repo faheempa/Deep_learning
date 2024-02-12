@@ -27,7 +27,7 @@ for col in df.columns:
     print(col, len(df[col].unique()))
 
 # pair plot
-cols2train = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', "quality"]
+cols2train = ['fixed acidity', 'volatile acidity', 'citric acid', "quality"]
 sns.pairplot(df[cols2train], kind='reg', hue='quality')
 plt.show()
 
@@ -88,6 +88,7 @@ data = torch.tensor(df[cols2train].values, dtype=torch.float32)
 labels = torch.tensor(df['quality'].values, dtype=torch.float32)
 print(data.shape)
 print(labels.shape)
+
 # making the labels 2D
 labels = labels.unsqueeze(1)
 print(labels.shape)

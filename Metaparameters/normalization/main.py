@@ -23,6 +23,7 @@ print(df.shape)
 # remove outliers
 df = df[df['total sulfur dioxide'] < 200]
 
+# get all columns except quality
 cols2train = df.keys()
 cols2train = cols2train.drop('quality')
 
@@ -49,10 +50,8 @@ train_dataset = TensorDataset(train_data, train_labels)
 test_dataset = TensorDataset(test_data, test_labels)
 
 # making dataloaders
-def create_dataloaders(batch_size):
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
-    test_loader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=True)
-    return train_loader, test_loader
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, drop_last=True)
+test_loader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=True)
 
 # ANN model
 class ANN(nn.Module):
@@ -118,9 +117,8 @@ def train_model(model, optimizer, loss_fn, train_dataloader, test_dataloader, ep
 
 # train model
 epochs = 2000
-train_dataloader, test_dataloader = create_dataloaders(batch_size=32)
 model, optimizer, loss_fn = create_model(input_dim=train_data.shape[1], output_dim=1)
-train_acc, test_acc = train_model(model, optimizer, loss_fn, train_dataloader, test_dataloader, epochs)
+train_acc, test_acc = train_model(model, optimizer, loss_fn, train_loader, test_loader, epochs)
 
 # plot results
 plt.plot(train_acc, label='train acc')

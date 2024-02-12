@@ -77,6 +77,7 @@ sm = nn.Softmax(dim=1)
 print(torch.sum(sm(pred), axis=1))
 
 # plot output with and without softmax
+plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
 plt.plot(pred.detach().numpy())
 plt.legend(iris.species.unique())

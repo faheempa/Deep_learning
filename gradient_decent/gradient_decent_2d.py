@@ -30,35 +30,34 @@ print(df_x(1, 1).evalf())
 print(df_y(1, 1).evalf())
 
 # random start point
-for i in range(5):
-    localmin = np.random.rand(2) * 4 - 2
-    startPoint = localmin[:]
-    print("start point: ", startPoint)
+localmin = np.random.rand(2) * 4 - 2
+startPoint = localmin[:]
+print("start point: ", startPoint)
 
-    # learning rate and iteration
-    lr = 0.01
-    epoch = 1000
+# learning rate and iteration
+lr = 0.01
+epoch = 1000
 
-    # run through training
-    trajectory = np.zeros((epoch, 2))
-    for i in range(epoch):
-        grad = np.array(
-            [
-                df_x(localmin[0], localmin[1]).evalf(),
-                df_y(localmin[0], localmin[1]).evalf(),
-            ],
-            dtype=np.float64,
-        )
-        localmin -= lr * grad
-        trajectory[i] = localmin.copy()
+# run through training
+trajectory = np.zeros((epoch, 2))
+for i in range(epoch):
+    grad = np.array(
+        [
+            df_x(localmin[0], localmin[1]).evalf(),
+            df_y(localmin[0], localmin[1]).evalf(),
+        ],
+        dtype=np.float64,
+    )
+    localmin -= lr * grad
+    trajectory[i] = localmin.copy()
 
-    print("end point: ", localmin)
+print("end point: ", localmin)
 
-    # plot the trajectory
-    plt.plot(trajectory[:, 0], trajectory[:, 1], "r.-")
-    plt.plot(trajectory[:, 0], trajectory[:, 1], "r.", markersize=3)
-    plt.plot(startPoint[0], startPoint[1], "bx", markersize=10)
-    plt.plot(localmin[0], localmin[1], "go", markersize=10)
-    plt.imshow(Z, extent=[-3, 3, -3, 3], vmin=-5, vmax=5, origin="lower")
-    plt.colorbar()
-    plt.show()
+# plot the trajectory
+plt.plot(trajectory[:, 0], trajectory[:, 1], "r.-")
+plt.plot(trajectory[:, 0], trajectory[:, 1], "r.", markersize=3)
+plt.plot(startPoint[0], startPoint[1], "bx", markersize=10)
+plt.plot(localmin[0], localmin[1], "go", markersize=10)
+plt.imshow(Z, extent=[-3, 3, -3, 3], vmin=-5, vmax=5, origin="lower")
+plt.colorbar()
+plt.show()
