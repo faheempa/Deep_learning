@@ -32,7 +32,7 @@ plt.plot(clsB[0], clsB[1], "o", label="class B")
 plt.plot(clsC[0], clsC[1], "o", label="class C")
 plt.legend()
 plt.title("Data")
-# plt.show()
+plt.show()
 
 # organize data
 label_np = np.hstack((np.zeros(nperClust), np.ones(nperClust), np.full(nperClust,2)))
